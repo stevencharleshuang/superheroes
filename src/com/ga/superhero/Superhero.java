@@ -11,14 +11,13 @@ public class Superhero {
     private static int correct = 0;
     private static int incorrect = 0;
 
-    // https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
-    private static File input = new File("./input.txt");
-    private Scanner sc = new Scanner(input);
     private static ArrayList<String> trivia = new ArrayList<>();
 
-    public Superhero() throws IOException {
-        String username = "";
+    public void game() throws IOException {
+        File input = new File("./input.txt");
+        Scanner sc = new Scanner(input);
 
+        String username = "";
 
         // https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
         try {
@@ -163,10 +162,7 @@ public class Superhero {
         PrintStream out = new PrintStream(output);
         System.setOut(out);
 
-        try {
-            System.out.println("Hey, " + name + "! \n\n" + result + "\n\nYou got this many answers right: " + right + "\nYou got this many answers wrong: " + wrong);
-        } catch (Exception e) {
-            System.out.println("Error while writing into the file: " + e.getMessage());
-        }
+        System.out.println("Hey, " + name + "! \n\n" + result + "\n\nYou got this many answers right: " + right + "\nYou got this many answers wrong: " + wrong);
+
     }
 }
