@@ -34,14 +34,16 @@ public class Superhero {
 
         String answer = scanner.nextLine();
 
+        String firstQuestion = "What city does this superhero canonically defend?";
+
         if(answer.equals("1") || answer.equals("superman")){
-            superman("What city does this superhero canonically defend?");
+            superman(firstQuestion, 1);
         } else if(answer.equals("2") || answer.equals("batman")){
-            batman();
+            batman(firstQuestion, 1);
         } else if(answer.equals("3") || answer.equals("spiderman")){
-            spiderman();
+            spiderman(firstQuestion, 1);
         } else if(answer.equals("4") || answer.equals("wonder woman")){
-            wonderWoman();
+            wonderWoman(firstQuestion, 1);
         } else {
             System.out.println("Invalid input!");
         }
@@ -56,9 +58,10 @@ public class Superhero {
         return scanner.nextLine();
     }
 
-    public static void superman(String q) {
+    // Refactor for DRYer Code
+    public static void superman(String q, int tracker) {
         String a = getInput(q);
-        int tracker = 1;
+        System.out.println(tracker);
 
         if (a.equalsIgnoreCase(trivia.get(trivia.indexOf("Superman") + tracker))) {
             System.out.println("Correct!");
@@ -68,28 +71,83 @@ public class Superhero {
             incorrect += 1;
         }
 
-        if (trivia.get(trivia.indexOf("Superman") + 2).equals("Batman")) {
+        // Refactor for dynamic index searching
+        if (trivia.get(trivia.indexOf("Superman") + tracker + 1).equals("Batman")) {
             return;
         } else {
             tracker += 1;
+            // Refactor this for dynamic questioning
             q = "What is the superhero's hidden identity?";
-            superman(q);
+            // Refactor this
+            superman(q, tracker);
         }
     }
 
-    public static void batman() {
-        String response = "batman";
-        System.out.println(response);
+    public static void batman(String q, int tracker) {
+        String a = getInput(q);
+        System.out.println(tracker);
+
+        if (a.equalsIgnoreCase(trivia.get(trivia.indexOf("Batman") + tracker))) {
+            System.out.println("Correct!");
+            correct += 1;
+        } else {
+            System.out.println("Incorrect...");
+            incorrect += 1;
+        }
+
+        if (trivia.get(trivia.indexOf("Batman") + tracker + 1).equals("Spiderman")) {
+            return;
+        } else {
+            tracker += 1;
+            // Refactor this for dynamic questioning
+            q = "What is the superhero's hidden identity?";
+            batman(q, tracker);
+        }
     }
 
-    public static void spiderman() {
-        String response = "spiderman";
-        System.out.println(response);
+    public static void spiderman(String q, int tracker) {
+        String a = getInput(q);
+        System.out.println(tracker);
+
+        if (a.equalsIgnoreCase(trivia.get(trivia.indexOf("Spiderman") + tracker))) {
+            System.out.println("Correct!");
+            correct += 1;
+        } else {
+            System.out.println("Incorrect...");
+            incorrect += 1;
+        }
+
+        if (trivia.get(trivia.indexOf("Spiderman") + tracker + 1).equals("Wonder Woman")) {
+            return;
+        } else {
+            tracker += 1;
+            // Refactor this for dynamic questioning
+            q = "What is the superhero's hidden identity?";
+            spiderman(q, tracker);
+        }
     }
 
-    public static void wonderWoman() {
-        String response = "wonder woman";
-        System.out.println(response);
+    public static void wonderWoman(String q, int tracker) {
+        String a = getInput(q);
+        System.out.println(tracker);
+
+        if (a.equalsIgnoreCase(trivia.get(trivia.indexOf("Wonder Woman") + tracker))) {
+            System.out.println("Correct!");
+            correct += 1;
+        } else {
+            System.out.println("Incorrect...");
+            incorrect += 1;
+        }
+
+        // Refactor this. Figure out how to check if the next element doesn't exist
+        if (trivia.get(trivia.indexOf("Wonder Woman") + tracker + 1) == null) {
+            return;
+        } else {
+            tracker += 1;
+            // Refactor this for dynamic questioning
+            q = "What is the superhero's hidden identity?";
+            wonderWoman(q, tracker);
+        }
     }
 
     public static void outputResults(String name, int right, int wrong) throws FileNotFoundException {
