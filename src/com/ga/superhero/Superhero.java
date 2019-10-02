@@ -2,6 +2,7 @@ package com.ga.superhero;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,18 +10,23 @@ import java.util.Scanner;
 public class Superhero {
     private static int correct = 0;
     private static int incorrect = 0;
+
+    // https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
     private static File input = new File("./input.txt");
     private Scanner sc = new Scanner(input);
     private static ArrayList<String> trivia = new ArrayList<>();
 
-    public Superhero() throws FileNotFoundException {
+    public Superhero() throws IOException {
         String username = "";
 
 
         // https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
-
-        while (sc.hasNextLine()) {
-            trivia.add(sc.nextLine());
+        try {
+            while (sc.hasNextLine()) {
+                trivia.add(sc.nextLine());
+            }
+        } catch (Exception e) {
+            System.out.println("Error while reading from the file: " + e.getMessage());
         }
 
         System.out.println(trivia);
@@ -150,12 +156,17 @@ public class Superhero {
         }
     }
 
-    public static void outputResults(String name, int right, int wrong) throws FileNotFoundException {
+    public static void outputResults(String name, int right, int wrong) throws FileNotFoundException, IOException {
         String result = (right >= wrong) ? "You won! =) Play again!" : "You lost! =( Play again!";
         // https://www.geeksforgeeks.org/redirecting-system-out-println-output-to-a-file-in-java/
         File output = new File("./output.txt");
         PrintStream out = new PrintStream(output);
         System.setOut(out);
-        System.out.println("Hey, " + name + "! \n\n" + result + "\n\nYou got this many answers right: " + right + "\nYou got this many answers wrong: " + wrong);
+
+        try {
+            System.out.println("Hey, " + name + "! \n\n" + result + "\n\nYou got this many answers right: " + right + "\nYou got this many answers wrong: " + wrong);
+        } catch (Exception e) {
+            System.out.println("Error while writing into the file: " + e.getMessage());
+        }
     }
 }
