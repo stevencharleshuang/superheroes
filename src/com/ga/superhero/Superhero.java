@@ -35,7 +35,7 @@ public class Superhero {
         String answer = scanner.nextLine();
 
         if(answer.equals("1") || answer.equals("superman")){
-            superman();
+            superman("What city does this superhero canonically defend?");
         } else if(answer.equals("2") || answer.equals("batman")){
             batman();
         } else if(answer.equals("3") || answer.equals("spiderman")){
@@ -56,13 +56,24 @@ public class Superhero {
         return scanner.nextLine();
     }
 
-    public static void superman() {
-        String a1 = getInput("What city does this superhero defend?");
+    public static void superman(String q) {
+        String a = getInput(q);
+        int tracker = 1;
 
-        if (a1.equalsIgnoreCase(trivia.get(trivia.indexOf("Superman") + 1))) {
+        if (a.equalsIgnoreCase(trivia.get(trivia.indexOf("Superman") + tracker))) {
             System.out.println("Correct!");
+            correct += 1;
         } else {
             System.out.println("Incorrect...");
+            incorrect += 1;
+        }
+
+        if (trivia.get(trivia.indexOf("Superman") + 2).equals("Batman")) {
+            return;
+        } else {
+            tracker += 1;
+            q = "What is the superhero's hidden identity?";
+            superman(q);
         }
     }
 
