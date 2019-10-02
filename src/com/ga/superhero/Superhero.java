@@ -2,6 +2,7 @@ package com.ga.superhero;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Superhero {
@@ -12,12 +13,10 @@ public class Superhero {
 
         System.out.println("Hello Superheroes");
         // https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
-        File file =
-                new File("./input.txt");
-        Scanner sc = new Scanner(file);
+        File input = new File("./input.txt");
+        Scanner sc = new Scanner(input);
 
-//        while (sc.hasNextLine())
-//            System.out.println(sc.nextLine());
+//        while (sc.hasNextLine()) System.out.println(sc.nextLine());
 
         // https://git.generalassemb.ly/nyc-s1-1/foundational-java/blob/master/java-basics/debugging-lesson/starter-code/simple-calculator/src/com/ga/Main.java
         System.out.println("Choose a superhero: \n1. superman \n2. batman \n3. spiderman \n4. wonder woman\n");
@@ -37,6 +36,8 @@ public class Superhero {
         } else {
             System.out.println("Invalid input!");
         }
+
+        outputResults(correct, incorrect);
     }
 
     // https://git.generalassemb.ly/nyc-s1-1/foundational-java/blob/master/java-basics/debugging-lesson/starter-code/simple-calculator/src/com/ga/Main.java
@@ -64,5 +65,14 @@ public class Superhero {
     public static void wonderWoman() {
         String response = "wonder woman";
         System.out.println(response);
+    }
+
+    public static void outputResults(int right, int wrong) throws FileNotFoundException {
+        String result = (right >= wrong) ? "You won! =) Play again!" : "You lost! =( Play again!";
+        // https://www.geeksforgeeks.org/redirecting-system-out-println-output-to-a-file-in-java/
+        File output = new File("./output.txt");
+        PrintStream out = new PrintStream(output);
+        System.setOut(out);
+        System.out.println(result);
     }
 }
