@@ -133,6 +133,14 @@ public class Superhero {
     }
 
     public static void wonderWoman(String q, int tracker) {
+        ArrayList <String> wonderTrivia = new ArrayList<>();
+
+        int wonderIndex = trivia.indexOf("Wonder Woman");
+
+        for (int i = wonderIndex; i < trivia.size(); i++) {
+            wonderTrivia.add(trivia.get(i));
+        }
+
         String a = getInput(q);
         System.out.println(tracker);
 
@@ -143,13 +151,13 @@ public class Superhero {
             System.out.println("Incorrect...");
             incorrect += 1;
         }
-
-        // Refactor this. Figure out how to check if the next element doesn't exist
-        if (trivia.get(trivia.indexOf("Wonder Woman") + tracker + 1) == null) {
+        
+        if (tracker == wonderTrivia.size() - 1) {
             return;
         } else {
             tracker += 1;
             // Refactor this for dynamic questioning
+            System.out.println(tracker + " " + trivia.indexOf("Wonder Woman"));
             q = "What is the superhero's hidden identity?";
             wonderWoman(q, tracker);
         }
