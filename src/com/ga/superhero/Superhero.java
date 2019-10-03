@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -61,6 +62,17 @@ public class Superhero {
         System.out.print(context + ": ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    static ArrayList<String> getHeroTrivia(String hero, int numFacts) {
+        int heroIndex = trivia.indexOf(hero);
+        ArrayList<String> heroTrivia = new ArrayList<>();
+
+        for (int i = heroIndex + 1; i < numFacts; i++) {
+            heroTrivia.add(trivia.get(i));
+        }
+
+        return heroTrivia;
     }
 
     // Refactor for DRYer Code
@@ -133,7 +145,7 @@ public class Superhero {
     }
 
     public static void wonderWoman(String q, int tracker) {
-        ArrayList <String> wonderTrivia = new ArrayList<>();
+        ArrayList <String> wonderTrivia = getHeroTrivia("Wonder Woman", 2);
 
         int wonderIndex = trivia.indexOf("Wonder Woman");
 
@@ -151,7 +163,7 @@ public class Superhero {
             System.out.println("Incorrect...");
             incorrect += 1;
         }
-        
+
         if (tracker == wonderTrivia.size() - 1) {
             return;
         } else {
